@@ -1,4 +1,4 @@
-name: Publish npm package
+name: Stage npm package
 
 on:
   release:
@@ -28,6 +28,8 @@ jobs:
           node-version: '24'
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
+      - name: Install the pinned npm CLI
+        run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
       - name: Validate publication identity and release tag
         run: |
           node --input-type=module <<'NODE'
@@ -44,8 +46,8 @@ jobs:
           }
           if (pkg.repository?.url !== `https://github.com/${process.env.GITHUB_REPOSITORY}.git`) throw new Error('Repository metadata must match the publishing repository.');
           if (!pkg.keywords?.includes('pi-package') || !pkg.pi?.extensions?.includes('./index.ts')) throw new Error('Pi package metadata is missing.');
-          const [major, minor, patch] = execFileSync('npm', ['--version'], { encoding: 'utf8' }).trim().split('.').map(Number);
-          if (major < 11 || (major === 11 && (minor < 5 || (minor === 5 && patch < 1)))) throw new Error('npm 11.5.1 or newer is required for trusted publishing.');
+          const [major, minor] = execFileSync('npm', ['--version'], { encoding: 'utf8' }).trim().split('.').map(Number);
+          if (!Number.isInteger(major) || !Number.isInteger(minor) || major < 11 || (major === 11 && minor < 15)) throw new Error('npm 11.15.0 or newer is required for staged publishing.');
           NODE
       - name: Reject a previously published version
         run: |
@@ -76,7 +78,7 @@ jobs:
           }
           NODE
 
-  publish:
+  stage:
     needs: verify
     runs-on: ubuntu-latest
     permissions:
@@ -92,11 +94,13 @@ jobs:
           node-version: '24'
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
-      - name: Pack the verified source and publish with OIDC
+      - name: Install the pinned npm CLI
+        run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
+      - name: Pack the verified source and stage with OIDC
         run: |
           npm pack --ignore-scripts --json --pack-destination "$RUNNER_TEMP" > "$RUNNER_TEMP/pi-cue-packed.json"
           node --input-type=module <<'NODE'
-          import { readFileSync } from 'node:fs';
+          import { appendFileSync, readFileSync } from 'node:fs';
           import { basename, join } from 'node:path';
           import { execFileSync } from 'node:child_process';
           const raw = JSON.parse(readFileSync(`${process.env.RUNNER_TEMP}/pi-cue-packed.json`, 'utf8'));
@@ -112,5 +116,17 @@ jobs:
           for (const path of ['index.ts', 'package.json', 'README.md', 'README.zh-CN.md', 'LICENSE']) {
             if (!paths.has(path)) throw new Error(`Required package file missing: ${path}`);
           }
-          execFileSync('npm', ['publish', join(process.env.RUNNER_TEMP, pack.filename), '--access', 'public', '--tag', 'latest', '--ignore-scripts'], { stdio: 'inherit' });
+          execFileSync('npm', ['stage', 'publish', join(process.env.RUNNER_TEMP, pack.filename), '--access', 'public', '--tag', 'latest', '--ignore-scripts'], { stdio: 'inherit' });
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
+            '## npm approval required',
+            '',
+            'The package is staged and awaits maintainer approval. The stage ID is printed in the staging step output.',
+            '',
+            'Sign in at [npmjs.com](https://www.npmjs.com/), open **Staged Packages**, and review the package, version, stage ID and contents before selecting **Approve** and completing 2FA.',
+            '',
+            'Alternatively, review with `npm stage view <stage-id>` and approve interactively with `npm stage approve <stage-id>`.',
+            '',
+            'This workflow does not approve stages or publish them directly. If a rerun finds this version already staged, inspect the existing stage before retrying.',
+            '',
+          ].join('\n'));
           NODE
