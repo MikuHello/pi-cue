@@ -1,0 +1,38 @@
+[
+  {
+    "id": "system",
+    "file": null,
+    "en": "System cue",
+    "zh-CN": "系统提示音",
+    "description": {
+      "en": "The system completion cue.",
+      "zh-CN": "系统完成提示音。"
+    },
+    "source": "Operating system sound mapping",
+    "license": "Provided by the operating system; no recording distributed"
+  },
+  {
+    "id": "soft",
+    "file": "soft.wav",
+    "en": "Soft chime",
+    "zh-CN": "轻柔双音",
+    "description": {
+      "en": "Two gentle notes.",
+      "zh-CN": "两个轻柔音符。"
+    },
+    "source": "Original synthesis in scripts/generate-sounds.mjs",
+    "license": "MIT; original synthesized project asset"
+  },
+  {
+    "id": "bright",
+    "file": "bright.wav",
+    "en": "Bright chime",
+    "zh-CN": "明亮上行音",
+    "description": {
+      "en": "Three ascending notes.",
+      "zh-CN": "三个上行音符。"
+    },
+    "source": "Original synthesis in scripts/generate-sounds.mjs",
+    "license": "MIT; original synthesized project asset"
+  }
+]

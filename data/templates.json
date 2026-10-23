@@ -1,0 +1,11 @@
+{
+  "en": {
+    "success": "Main agent finished in {duration}",
+    "failure": "Main agent failed after {duration}",
+    "abort": "Main agent cancelled after {duration}",
+    "ask": "Main agent is waiting for an answer",
+    "subagentSuccess": "Background task finished in {duration}",
+    "subagentFailure": "Background task failed after {duration}",
+    "background": "Background tasks are still running"
+  }
+}

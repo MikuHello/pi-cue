@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
+  <title id="title">pi-cue — Pi completion cues</title>
+  <desc id="desc">A terminal-native Pi extension. Use /cue for settings and /cue debug for troubleshooting. Notifications and sounds are independently controlled.</desc>
+  <rect width="1200" height="300" rx="16" fill="#14171f"/>
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace">
+    <text x="64" y="70" fill="#9ca9bc" font-size="21" letter-spacing="3">PI COMPLETION CUES</text>
+    <text x="60" y="177" fill="#f0f3f8" font-size="100" font-weight="700">pi-cue<tspan fill="#baa1ee">_</tspan></text>
+    <path d="M674 62 V238" stroke="#373d4b" stroke-width="2"/>
+    <text x="730" y="121" fill="#baa1ee" font-size="44">/cue</text>
+    <text x="730" y="190" fill="#d9e0eb" font-size="36">/cue debug</text>
+  </g>
+  <g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,sans-serif">
+    <text x="64" y="242" fill="#bdc7d7" font-size="26">任务完成提醒，通知与音效各自控制。</text>
+    <text x="1080" y="121" fill="#9ca9bc" font-size="24">设置</text>
+    <text x="1080" y="190" fill="#9ca9bc" font-size="24">排障</text>
+  </g>
+</svg>

@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "pi-cue configuration v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "settings"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "notifyOnError": {
+          "type": "boolean",
+          "default": true
+        },
+        "notifyOnAbort": {
+          "type": "boolean",
+          "default": false
+        },
+        "minWorkMs": {
+          "type": "integer",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 86400000
+        },
+        "minAwayMs": {
+          "type": "integer",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 86400000
+        },
+        "language": {
+          "type": "string",
+          "default": "en",
+          "enum": [
+            "en",
+            "zh-CN"
+          ]
+        },
+        "nativeNotification": {
+          "type": "boolean",
+          "default": true
+        },
+        "backend": {
+          "type": "string",
+          "default": "auto",
+          "enum": [
+            "auto",
+            "macos",
+            "windows",
+            "linux"
+          ]
+        },
+        "notifyWhenFocused": {
+          "type": "boolean",
+          "default": false
+        },
+        "notifyWhenUnfocused": {
+          "type": "boolean",
+          "default": true
+        },
+        "notificationTitle": {
+          "type": "string",
+          "default": "Pi: {session}",
+          "maxLength": 512
+        },
+        "notificationBody": {
+          "type": "string",
+          "default": "",
+          "maxLength": 4096
+        },
+        "soundEnabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "soundWhenFocused": {
+          "type": "boolean",
+          "default": true
+        },
+        "soundWhenUnfocused": {
+          "type": "boolean",
+          "default": true
+        },
+        "soundPreset": {
+          "type": "string",
+          "default": "system",
+          "enum": [
+            "system",
+            "soft",
+            "bright",
+            "file"
+          ]
+        },
+        "soundFile": {
+          "type": "string",
+          "default": "",
+          "maxLength": 4096
+        },
+        "markerEnabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "markWhenUnfocused": {
+          "type": "boolean",
+          "default": true
+        },
+        "markerPrefix": {
+          "type": "string",
+          "default": "[!] ",
+          "maxLength": 64
+        },
+        "clearOnFocus": {
+          "type": "boolean",
+          "default": true
+        },
+        "clearOnStart": {
+          "type": "boolean",
+          "default": true
+        },
+        "unknownFocusPolicy": {
+          "type": "string",
+          "default": "unfocused",
+          "enum": [
+            "unfocused",
+            "focused",
+            "silent"
+          ]
+        },
+        "notifyOnAsk": {
+          "type": "boolean",
+          "default": false
+        },
+        "subagentNotifications": {
+          "type": "boolean",
+          "default": false
+        },
+        "subagentOnSuccess": {
+          "type": "boolean",
+          "default": true
+        },
+        "subagentOnFailure": {
+          "type": "boolean",
+          "default": true
+        },
+        "headlessNotifications": {
+          "type": "boolean",
+          "default": false,
+          "const": false
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,15 @@
+node_modules/
+.dev/
+*.tgz
+__pycache__/
+*.py[cod]
+.DS_Store
+
+.codex/
+.agents/
+HANDOFF.md
+pi_agent_notification_site_updated.html
+docs/decisions.md
+docs/ux.md
+docs/validation.md
+docs/native-validation.json

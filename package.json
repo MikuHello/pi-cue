@@ -1,0 +1,67 @@
+{
+  "name": "@mikuhello/pi-cue",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "license": "MIT",
+  "description": "Focus-aware completion cues for Pi",
+  "keywords": [
+    "pi-package"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MikuHello/pi-cue.git"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "node --test tests/*.test.ts",
+    "assets": "node scripts/generate-sounds.mjs",
+    "schema": "node scripts/generate-schema.mjs",
+    "sound:add": "node scripts/add-sound.ts",
+    "dev": "node scripts/dev.mjs",
+    "test:host": "python3 scripts/host-smoke.py"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "1.4.0",
+    "@earendil-works/pi-tui": "1.4.0",
+    "@types/node": "24.13.3",
+    "typescript": "5.9.3"
+  },
+  "files": [
+    "index.ts",
+    "src/",
+    "data/",
+    "assets/",
+    "scripts/notify-macos.js",
+    "scripts/notify-windows.ps1",
+    "scripts/sound-windows.ps1",
+    "scripts/add-sound.ts",
+    "scripts/generate-schema.mjs",
+    "scripts/generate-sounds.mjs",
+    "docs/configuration.md",
+    "docs/integrations.md",
+    "docs/platforms.md",
+    "docs/sounds.md",
+    "docs/licenses/",
+    "docs/images/",
+    "CONTRIBUTING.md",
+    "README.zh-CN.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "tag": "latest"
+  }
+}
